@@ -10,16 +10,16 @@ There should be 1 activityLogger per application.  The activity logger object wi
 
 
 ```javascript
-\\ Standard
+// Standard
 var ac = new activityLogger();
 
-\\ Echo logging in console
+// Echo logging in console
 var ac = new activityLogger().echo(true);
 
-\\ Mute USER and SYS actions
+// Mute USER and SYS actions
 var ac = new activityLogger().mute(['SYS', 'USER']);
 
-\\ Testing: will not contact Draper Server
+// Testing: will not contact Draper Server
 var ac = new activityLogger().testing(true);
 
 \\ are chainable
