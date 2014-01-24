@@ -22,7 +22,7 @@ var ac = new activityLogger().mute(['SYS', 'USER']);
 // Testing: will not contact Draper Server
 var ac = new activityLogger().testing(true);
 
-\\ are chainable
+// are chainable
 var ac = new activityLogger().echo(true).testing(true);
 ```
 
