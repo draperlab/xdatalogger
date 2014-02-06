@@ -15,20 +15,18 @@ function activityLogger() {
   var muteSystemActivityLogging = false;
   var logToConsole = false;
   var testing = false;
-  var workflowCodingVersion = '1.0'
+  var workflowCodingVersion = '2.0'
 
   /**
   * Workflow Codes
   */
 	draperLog.WF_OTHER       = 0;
-	draperLog.WF_PLAN        = 1;
-	draperLog.WF_SEARCH      = 2;
-	draperLog.WF_EXAMINE     = 3;
-	draperLog.WF_MARSHAL     = 4;
-	draperLog.WF_REASON      = 5;
-	draperLog.WF_COLLABORATE = 6;
-	draperLog.WF_REPORT      = 7;
-	
+	draperLog.WF_DEFINE      = 1;
+	draperLog.WF_GETDATA     = 2;
+	draperLog.WF_EXPLORE     = 3;
+	draperLog.WF_CREATE      = 4;
+	draperLog.WF_ENRICH      = 5;
+	draperLog.WF_TRANSFORM   = 6;	
 
 	/**
 	* Registers this component with Draper's logging server.  The server creates
@@ -71,6 +69,8 @@ function activityLogger() {
 			draperLog.sessionID = 'test_session'
 			draperLog.clientHostname = 'test_client';
 		}
+
+		classListener();
 
 		return draperLog;
 	}
@@ -172,12 +172,26 @@ function activityLogger() {
 		}
 	}
 
+	/**
+	* When set to true, logs messages to browser console.
+	*
+	* @method echo
+	* @param {Boolean} set to true to log to console
+	*/
 	draperLog.echo = function(d) {
     if (!arguments.length) return logToConsole;
     logToConsole = d;
     return draperLog;
   };
 
+  /**
+	* Accepts an array of Strings telling logger to mute those type of messages.
+	* Possible values are 'SYS' and 'USER'.  These messages will not be sent to
+	* server. 
+	*
+	* @method mute
+	* @param {Array} array of strings of messages to mute.
+	*/
   draperLog.mute = function(d) {
   	d.forEach(function(d) {
   		if(d == 'USER') muteUserActivityLogging = true;
@@ -186,11 +200,48 @@ function activityLogger() {
     return draperLog;
   };
 
+  /**
+	* When set to true, no connection will be made against logging server.
+	*
+	* @method testing
+	* @param {Boolean} set to true to disable all connection to logging server
+	*/
   draperLog.testing = function(d) {
   	if (!arguments.length) return testing;
     testing = d;
     return draperLog;
   };
+
+  /**
+	* DOM Listener for specific events.
+	* 
+	*/
+  function classListener() {
+
+  	$( document ).ready(function() {
+  		console.log('DOM Ready classListener');
+  		window.A = $(".draper")
+
+	    $(".draper").each(function(i,d){
+	    	var elem = $(d)
+	    	// console.log($(d).data('wf'))
+	    	$(d).on("click", function(a){	    		
+	    		console.log($(this).data('activity'), elem.data('activity'))
+	    		ac.logUserActivity('Testing User Activity Message ' + d, $(this).data('activity'), $(this).data('wf'))
+	    	})
+	    	$(d).on("mouseenter", function(a){	    		
+	    		ac.logUserActivity('Hover', 'hover', 3)
+	    	})
+	    })
+
+	    $(window).scroll(function() {
+		    clearTimeout($.data(this, 'scrollTimer'));
+		    $.data(this, 'scrollTimer', setTimeout(function() {
+		        ac.logUserActivity('User scrolled window', 'scroll', 3)
+		    }, 500));
+			});
+		});
+  }  
 
 	return draperLog;
 }
