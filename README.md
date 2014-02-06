@@ -58,6 +58,6 @@ d3.select("#order-cost")
 1. **WF_DEFINE** - define_hypothesis
 2. **WF_GETDATA** - write_query, select_option, execute_query, monitor_query
 3. **WF_EXPLORE** - browse, pan, zoom, scale, rotate, filter, drill, select, crossfilter, scroll, read (including mouse popovers), listen (if audio), watch (if imagery / video), toggle_option, highlight, sort_data, select_data, down_select_data, filter_data
-4. **WF_CREATE** - create_visualization, define_axes, define_chart_type, define_table, move_window, resize_window, set_color_palette, select_layers, {add,remove,sort,split,merge}_{rows,columns}, arrange_windows
+4. **WF_CREATE** - create_visualization, define_axes, define_chart_type, define_table, move_window, resize_window, set_color_palette, select_layers, {add,remove,split,merge}_{rows,columns}, arrange_windows
 5. **WF_ENRICH** - add_note, bookmark_view, label
 6. **WF_TRANSFORM** - denoise, detrend, pattern_search, do_math, transform_data, coordinate_transform
