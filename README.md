@@ -48,7 +48,7 @@ d3.select("#order-cost")
 .on("click", function () {
   home.order = "cost";
   home.update();
-  ac.logUserActivity("Reorder Bar Chart by Cost", "changeXAxis",  ac.WF_EXPLORE);
+  ac.logUserActivity("Reorder Bar Chart by Cost", "sort_data",  ac.WF_EXPLORE);
 });
 ```
 
