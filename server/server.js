@@ -29,7 +29,7 @@ if (!!argv.port) {
 // MongoDB interface
 var databaseUrl = "xdata"; // "username:password@example.com/mydb"
 var collections = ["logs", "sessions"]
-db.connect(databaseUrl, collections);
+db = db.connect(databaseUrl, collections);
 
 var app = express();
 app.use(express.bodyParser());
@@ -46,7 +46,8 @@ app.post('/send_log', function(req, res){
     // Allow CORS
     var origin = (req.headers.origin || "*");
     res.header("Access-Control-Allow-Origin", origin);
-  	res.end()
+    res.json({});  	
+res.end()
   });
 });
 
@@ -56,18 +57,19 @@ app.get('/session', function(req, res){
 
 // endpoint to register session
 app.get('/register', function(req, res){
-	console.log('registering session')
+	console.log('registering session', req.connection.remoteAddress)
 	var client_ip = req.connection.remoteAddress
   var data = {client_ip: client_ip};
+	console.log(data);
   db.sessions.insert(data, function (err, result) {
     
     // Allow CORS
     var origin = (req.headers.origin || "*");
     res.header("Access-Control-Allow-Origin", origin);
 
-    console.log(result, result[0]._id)
+    console.log(result, result._id)
   	res.json({
-			session_id: result[0]._id,
+			session_id: result._id,
 			client_ip: req.connection.remoteAddress
 		})
     res.end()
