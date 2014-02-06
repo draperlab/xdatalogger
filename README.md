@@ -54,11 +54,10 @@ d3.select("#order-cost")
 
 ## Workflow States
 
-0. Other - The action does not correspond to any workflow state. Please contact Draper for guidance.
-1. Plan - Tasking, Configuring Tools, Switching Tools, Version, To-Do-Lists
-2. Search - Query, Monitor, Query Refinement, Scan, Filter, Access, Focus
-3. Examine - Read, Listen, Watch, Compare, Correlate
-4. Marshal - Arrange, Categorize, Extract, Merge
-5. Reason - Hypothesize, Argument, Perspective, Rearrange, Link, Annotate, Asses
-6. Collaborate - Asynchronous/Synchronous Review, Present
-7. Report - Compose, Edit, Milestone Definition, Summarize 
+0. WF_OTHER - The action does not correspond to any workflow state. Please contact Draper for guidance.
+1. WF_DEFINE - define_hypothesis
+2. WF_GETDATA - write_query, select_option, execute_query, monitor_query
+3. WF_EXPLORE - browse, pan, zoom, scale, rotate, filter, drill, select, crossfilter, scroll, read (including mouse popovers), listen (if audio), watch (if imagery / video), toggle_option, highlight, sort_data, select_data, down_select_data, filter_data
+4. WF_CREATE - create_visualization, define_axes, define_chart_type, define_table, move_window, resize_window, set_color_palette, select_layers, {add,remove,sort,split,merge}_{rows,columns}, arrange_windows
+5. WF_ENRICH - add_note, bookmark_view, label
+6. WF_TRANSFORM - denoise, detrend, pattern_search, do_math, transform_data, coordinate_transform
