@@ -73,7 +73,7 @@ ac.tag('#sl1', {
 ```
 
 ## Workflow States
-The following list contains the 7 workflow states we are interested in monitoring.  Within each workflow state there are a set of actions we anticipate the users doing.  Developers are welcome to create more if they are not able to find an action within this list that does not correspond to an action they wish to record.
+The following list contains the 7 workflow states we are interested in monitoring.  Within each workflow state there are a set of actions we anticipate the users doing.  Developers are welcome to create more if the action they wish to record is not in this list.
 
 0. **WF_OTHER** - The action does not correspond to any workflow state. Please contact Draper for guidance.
 1. **WF_DEFINE** - define_hypothesis
