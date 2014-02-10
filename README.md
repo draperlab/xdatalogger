@@ -42,7 +42,9 @@ A User action requires 3 elements.
 * A one word action description that should be repeated across tool
 * A workflow state (more information below)
 
-The following is an example of registering an action with a d3 object.
+There are currently 3 methods available to log USER events, examples of each are shown below.
+
+### Logging Method A
 ```javascript
 d3.select("#order-cost")
 .on("click", function () {
@@ -50,9 +52,29 @@ d3.select("#order-cost")
   home.update();
   ac.logUserActivity("Reorder Bar Chart by Cost", "sort_data",  ac.WF_EXPLORE);
 });
+})
+```
+
+### Logging Method B
+```javascript
+ac.tag('#sl1', {
+	events: ['mouseenter', 'mouseleave', 'change'],
+	wf_state: ac.WF_EXPLORE,
+	activity: 'select_option',
+	desc: 'User selected option from list'
+})
+```
+
+### Logging Method C
+```html
+<li class="dropdown draper" data-wf='4' data-activity='select'>
+  ...
+</li>
+```
 ```
 
 ## Workflow States
+The following list contains the 7 workflow states we are interested in monitoring.  Within each workflow state there are a set of actions we anticipate the users doing.  Developers are welcome to create more if they are not able to find an action within this list that does not correspond to an action they wish to record.
 
 0. **WF_OTHER** - The action does not correspond to any workflow state. Please contact Draper for guidance.
 1. **WF_DEFINE** - define_hypothesis
