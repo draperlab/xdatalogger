@@ -4,8 +4,8 @@ Load `jstest.html` in any modern browser and open the console to view events bei
 
 ### Instantiation and Registration
 ```javascript
-var ac = new activityLogger();
 var ac = new activityLogger().echo(true).testing(true);
+ac.registerActivityLogger('http://localhost:3000', 'demo', '0.1')
 ```
 
 ### Logging Method A
