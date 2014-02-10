@@ -219,19 +219,11 @@ function activityLogger() {
   function classListener() {
 
   	$( document ).ready(function() {
-  		console.log('DOM Ready classListener');
-  		window.A = $(".draper")
-
 	    $(".draper").each(function(i,d){
 	    	var elem = $(d)
-	    	// console.log($(d).data('wf'))
 	    	$(d).on("click", function(a){	    		
-	    		console.log($(this).data('activity'), elem.data('activity'))
 	    		ac.logUserActivity('User clicked element', $(this).data('activity'), $(this).data('wf'))
-	    	})
-	    	$(d).on("mouseenter", function(a){	    		
-	    		ac.logUserActivity('Hover', 'hover', 3)
-	    	})
+	    	});	    	
 	    })
 
 	    $(window).scroll(function() {
@@ -248,10 +240,20 @@ function activityLogger() {
 	* 
 	*/
 	draperLog.tag = function(elem, msg) {
-		msg.events.each(function(i, d) {
-			$(elem).on(d, function() {
-				ac.logUserActivity(msg.desc, msg.activity, msg.wf_state);
-			})
+		$.each(msg.events, function(i, d) {
+			if (d == 'scroll') {
+				console.log('found scroll')
+				$(elem).scroll(function() {
+			    clearTimeout($.data(this, 'scrollTimer'));
+			    $.data(this, 'scrollTimer', setTimeout(function() {
+			        ac.logUserActivity('User scrolled window', 'scroll', 3)
+			    }, 500));
+				});
+			}else{
+				$(elem).on(d, function() {
+					ac.logUserActivity(msg.desc, msg.activity, msg.wf_state);
+				})
+			}
 		});		
 	};
 

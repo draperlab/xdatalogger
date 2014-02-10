@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Draper Logging Test</title>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/css/bootstrap.css">
+
+	
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="../javascript/draper.activity_logger-2.0.js"></script>
+</head>
+<body>
+	<div class="container">
+
+    <!-- Static navbar -->
+    <div class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">          
+          <a class="navbar-brand" href="#">Draper Logger Example</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li class="dropdown draper" data-wf='4' data-activity='select'>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="./">Default</a></li>
+            <li><a href="../navbar-static-top/">Static top</a></li>
+            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </div>
+
+    <!-- Main component for a primary marketing message or call to action -->
+   	<table class="table">
+	    <thead>
+	      <tr>
+	        <th>#</th>
+	        <th>First Name</th>
+	        <th>Last Name</th>
+	        <th>Username</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <td>1</td>
+	        <td>Mark</td>
+	        <td>Otto</td>
+	        <td>@mdo</td>
+	      </tr>
+	      <tr>
+	        <td>2</td>
+	        <td>Jacob</td>
+	        <td>Thornton</td>
+	        <td>@fat</td>
+	      </tr>
+	      <tr>
+	        <td>3</td>
+	        <td>Larry</td>
+	        <td>the Bird</td>
+	        <td>@twitter</td>
+	      </tr>
+	    </tbody>
+	  </table>
+		
+		<form role="form">
+		  <div class="form-group">
+		    <label for="exampleInputEmail1">Email address</label>
+		    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">Password</label>
+		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputFile">File input</label>
+		    <input type="file" id="exampleInputFile">
+		    <p class="help-block">Example block-level help text here.</p>
+		  </div>
+		  <div class="checkbox">
+		    <label>
+		      <input id='cb1' type="checkbox"> Check me out
+		    </label>
+		  </div>
+		  <button type="submit" class="btn btn-default">Submit</button>
+		</form>
+		<select id='sl1' class="form-control">
+		  <option>1</option>
+		  <option>2</option>
+		  <option>3</option>
+		  <option>4</option>
+		  <option>5</option>
+		  <option>1</option>
+		  <option>2</option>
+		  <option>3</option>
+		  <option>4</option>
+		  <option>5</option>
+		  <option>1</option>
+		  <option>2</option>
+		  <option>3</option>
+		  <option>4</option>
+		  <option>5</option>
+		  <option>1</option>
+		  <option>2</option>
+		  <option>3</option>
+		  <option>4</option>
+		  <option>5</option>
+		  <option>1</option>
+		  <option>2</option>
+		  <option>3</option>
+		  <option>4</option>
+		  <option>5</option>
+		  <option>1</option>
+		  <option>2</option>
+		  <option>3</option>
+		  <option>4</option>
+		  <option>5</option>
+		</select>
+  </div> <!-- /container -->
+	
+	<script>
+		var ac = new activityLogger().echo(true).testing(true);
+		ac.registerActivityLogger('http://localhost:3000', 'demo', '0.1')
+
+		ac.tag('#exampleInputEmail1', {
+			events: ['focus'],
+			wf_state: ac.WF_GETDATA,
+			activity: 'write_query',
+			desc: 'user clicked/focused on query input box'
+		});
+
+		ac.tag('#cb1', {
+			events: ['click'],
+			wf_state: ac.WF_GETDATA,
+			activity: 'select_option',
+			desc: 'user selected checkbox'
+		})
+
+		ac.tag('table>tbody>tr', {
+			events: ['mouseenter', 'mouseleave'],
+			wf_state: ac.WF_EXPLORE,
+			activity: 'hover_start',
+			desc: 'User hovered'
+		})
+
+		ac.tag('#sl1', {
+			events: ['mouseenter', 'mouseleave', 'change'],
+			wf_state: ac.WF_EXPLORE,
+			activity: 'select_option',
+			desc: 'User selected option from list'
+		})
+
+	</script>
+</body>
+</html>

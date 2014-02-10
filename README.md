@@ -32,7 +32,7 @@ Registering the logger requires the logging server URL, the name of your compone
 
 Registering with Draper's server is a blocking call, and ensures that a sessionID is registered with the logger.
 ```javascript
-ac.registerActivityLogger("http:\\localhost:3000", "KitwareHospitalCosts", "0.1");
+ac.registerActivityLogger("http://localhost:3000", "KitwareHospitalCosts", "0.1");
 ```
 
 ### Logging a USER Action
