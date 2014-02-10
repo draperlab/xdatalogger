@@ -241,7 +241,19 @@ function activityLogger() {
 		    }, 500));
 			});
 		});
-  }  
+  }
+
+  /**
+	* Tag specific elements
+	* 
+	*/
+	draperLog.tag = function(elem, msg) {
+		msg.events.each(function(i, d) {
+			$(elem).on(d, function() {
+				ac.logUserActivity(msg.desc, msg.activity, msg.wf_state);
+			})
+		});		
+	};
 
 	return draperLog;
 }
