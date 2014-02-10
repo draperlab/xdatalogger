@@ -44,7 +44,7 @@ A User action requires 3 elements.
 
 There are currently 3 methods available to log USER events, examples of each are shown below.
 
-### Logging Method A
+#### Logging Method A
 ```javascript
 d3.select("#order-cost")
 .on("click", function () {
@@ -55,7 +55,7 @@ d3.select("#order-cost")
 })
 ```
 
-### Logging Method B
+#### Logging Method B
 ```javascript
 ac.tag('#sl1', {
 	events: ['mouseenter', 'mouseleave', 'change'],
@@ -65,14 +65,14 @@ ac.tag('#sl1', {
 })
 ```
 
-### Logging Method C
+#### Logging Method C
 ```html
 <li class="dropdown draper" data-wf='4' data-activity='select'>
   ...
 </li>
 ```
 
-## Workflow States
+#### Workflow States
 The following list contains the 7 workflow states we are interested in monitoring.  Within each workflow state there are a set of actions we anticipate the users doing.  Developers are welcome to create more if the action they wish to record is not in this list.
 
 0. **WF_OTHER** - The action does not correspond to any workflow state. Please contact Draper for guidance.
@@ -91,7 +91,7 @@ For example, when a user enters a query and hits submit, a USER action is fired.
 
 An example of this is below:
 ```javascript
-ac.logSystemActivity('asking server for data.')
+ac.logUserActivity("asking server for data", "execute_query",  ac.WF_GETDATA);
 
 $.getJSON('https://my_endpoint/get_data', data, function(data) {
 	ac.logSysActivity('received data from server');
