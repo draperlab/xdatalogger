@@ -83,6 +83,7 @@ The following list contains the 7 workflow states we are interested in monitorin
 5. **WF_ENRICH** - add_note, bookmark_view, label
 6. **WF_TRANSFORM** - denoise, detrend, pattern_search, do_math, transform_data, coordinate_transform
 
+-------------
 
 ### Logging a SYS Action
 The logging of system actions are aimed to log those events that are not explicitly triggered by the user, as well as measure any latency in the system.  
