@@ -82,3 +82,19 @@ The following list contains the 7 workflow states we are interested in monitorin
 4. **WF_CREATE** - create_visualization, define_axes, define_chart_type, define_table, move_window, resize_window, set_color_palette, select_layers, {add,remove,split,merge}_{rows,columns}, arrange_windows
 5. **WF_ENRICH** - add_note, bookmark_view, label
 6. **WF_TRANSFORM** - denoise, detrend, pattern_search, do_math, transform_data, coordinate_transform
+
+
+### Logging a SYS Action
+The logging of system actions are aimed to log those events that are not explicitly triggered by the user, as well as measure any latency in the system.  
+
+For example, when a user enters a query and hits submit, a USER action is fired. When the query results are returned 10s later, a SYS action should be fired to record that new data has arrived.  
+
+An example of this is below:
+```javascript
+ac.logSystemActivity('asking server for data.')
+
+$.getJSON('https://my_endpoint/get_data', data, function(data) {
+	ac.logSysActivity('received data from server');
+	$("#result").text(data.result);
+})
+```
