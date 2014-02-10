@@ -227,7 +227,7 @@ function activityLogger() {
 	    	// console.log($(d).data('wf'))
 	    	$(d).on("click", function(a){	    		
 	    		console.log($(this).data('activity'), elem.data('activity'))
-	    		ac.logUserActivity('Testing User Activity Message ' + d, $(this).data('activity'), $(this).data('wf'))
+	    		ac.logUserActivity('User clicked element', $(this).data('activity'), $(this).data('wf'))
 	    	})
 	    	$(d).on("mouseenter", function(a){	    		
 	    		ac.logUserActivity('Hover', 'hover', 3)
