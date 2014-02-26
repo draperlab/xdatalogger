@@ -15,7 +15,7 @@ function activityLogger() {
   var muteSystemActivityLogging = false;
   var logToConsole = false;
   var testing = false;
-  var workflowCodingVersion = '2.0'
+  var workflowCodingVersion = '2.0';
 
   /**
   * Workflow Codes
@@ -58,7 +58,7 @@ function activityLogger() {
 					draperLog.clientHostname = a.client_ip;
 				},
 				error: function(){
-					console.error('DRAPER LOG: Could not register session with Drapers server!')
+					console.error('DRAPER LOG: Could not register session with Drapers server!');
 				}
 			});
 		} else {
@@ -66,14 +66,14 @@ function activityLogger() {
 			if (logToConsole) {
 				console.log('DRAPER LOG: (TESTING) Session successfully registered');
 			}
-			draperLog.sessionID = 'test_session'
+			draperLog.sessionID = 'test_session';
 			draperLog.clientHostname = 'test_client';
 		}
 
 		classListener();
 
 		return draperLog;
-	}
+	};
 
 	/**
 	* Create USER activity message.   
@@ -96,10 +96,10 @@ function activityLogger() {
 						wf_version: workflowCodingVersion 
 	    		},
 	    		meta: softwareMetadata
-	    	}
+	    	};
 	    	sendMessage(msg);         
 	    }
-	}
+	};
 
 	/**
 	* Create SYSTEM activity message.  
@@ -117,10 +117,10 @@ function activityLogger() {
 	    			desc: actionDescription,	          
 	    		},
 	    		meta: softwareMetadata
-	    	}
+	    	};
 	    	sendMessage(msg);         
 	    }
-	}
+	};
 
 	/**
 	* Set Session Cookie on Client. NOT YET IMPLEMENTED.
@@ -162,7 +162,7 @@ function activityLogger() {
 					}
 				},
 				error: function(){
-					console.error('DRAPER LOG: could not send activity log to Draper server!')
+					console.error('DRAPER LOG: could not send activity log to Draper server!');
 				}
 			});
 		} else {
@@ -220,16 +220,15 @@ function activityLogger() {
 
   	$( document ).ready(function() {
 	    $(".draper").each(function(i,d){
-	    	var elem = $(d)
 	    	$(d).on("click", function(a){	    		
-	    		ac.logUserActivity('User clicked element', $(this).data('activity'), $(this).data('wf'))
+	    		draperLog.logUserActivity('User clicked element', $(this).data('activity'), $(this).data('wf'));
 	    	});	    	
-	    })
+	    });
 
 	    $(window).scroll(function() {
 		    clearTimeout($.data(this, 'scrollTimer'));
 		    $.data(this, 'scrollTimer', setTimeout(function() {
-		        ac.logUserActivity('User scrolled window', 'scroll', 3)
+		    	draperLog.logUserActivity('User scrolled window', 'scroll', 3);
 		    }, 500));
 			});
 		});
@@ -242,17 +241,17 @@ function activityLogger() {
 	draperLog.tag = function(elem, msg) {
 		$.each(msg.events, function(i, d) {
 			if (d == 'scroll') {
-				console.log('found scroll')
+				console.log('found scroll');
 				$(elem).scroll(function() {
 			    clearTimeout($.data(this, 'scrollTimer'));
 			    $.data(this, 'scrollTimer', setTimeout(function() {
-			        ac.logUserActivity('User scrolled window', 'scroll', 3)
+			    	draperLog.logUserActivity('User scrolled window', 'scroll', 3);
 			    }, 500));
 				});
 			}else{
 				$(elem).on(d, function() {
-					ac.logUserActivity(msg.desc, msg.activity, msg.wf_state);
-				})
+					draperLog.logUserActivity(msg.desc, msg.activity, msg.wf_state);
+				});
 			}
 		});		
 	};
