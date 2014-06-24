@@ -62,6 +62,10 @@ function activityLogger(webWorkerURL) {
 
 		draperLog.sessionID = getParameterByName('USID');
 
+    if (!draperLog.sessionID) {
+      draperLog.sessionID = draperLog.componentName.slice(0,3) + new Date().getTime()
+    }
+
 		// set the logging URL on the Web Worker
 		draperLog.worker.postMessage({
 	  	cmd: 'setLoggingUrl',
@@ -72,9 +76,9 @@ function activityLogger(webWorkerURL) {
 
 		if (logToConsole) {
 			if (testing) {
-				console.log('DRAPER LOG: (TESTING) Registered Activity Logger');
+				console.log('DRAPER LOG: (TESTING) Registered Activity Logger ' + draperLog.sessionID);
 			} else {
-				console.log('DRAPER LOG: Registered Activity Logger');
+				console.log('DRAPER LOG: Registered Activity Logger ' + draperLog.sessionID);
 			}			
 		}
 
