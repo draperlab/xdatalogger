@@ -115,6 +115,14 @@ function activityLogger(webWorkerURL) {
 				meta: softwareMetadata
 			};
 			sendMessage(msg);
+
+      if (logToConsole) {
+        if (testing) {
+          console.log('DRAPER LOG: (TESTING) Logging UserActivity', msg.parms);
+        } else {
+          console.log('DRAPER LOG: Logging UserActivity', msg.parms);
+        }
+      }
 		}
 	};
 
@@ -136,6 +144,14 @@ function activityLogger(webWorkerURL) {
 				meta: softwareMetadata
 			};
 			sendMessage(msg);
+
+      if (logToConsole) {
+        if (testing) {
+          console.log('DRAPER LOG: (TESTING) Logging SystemActivity', msg.parms);
+        } else {
+          console.log('DRAPER LOG: Logging SystemActivity', msg.parms);
+        }
+      }
 		}
 	};
 
@@ -193,6 +209,14 @@ function activityLogger(webWorkerURL) {
 		});
 		return draperLog;
 	};
+
+  draperLog.unmute = function(d) {
+    d.forEach(function(d) {
+      if(d === 'USER') { muteUserActivityLogging = false; }
+      if(d === 'SYS') { muteSystemActivityLogging = false; }
+    });
+    return draperLog;
+  };
 
   /**
 	* When set to true, no connection will be made against logging server.
