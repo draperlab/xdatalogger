@@ -55,6 +55,7 @@ self.addEventListener('message', function(e) {
 
 
 function sendBuffer() {
+  // method to force send the buffer
 	timerMethod();
 	if (echo) {
 		console.log(msg + ' buffer sent')
@@ -63,8 +64,6 @@ function sendBuffer() {
 //simple XHR request in pure raw JavaScript
 function XHR(url, log, callback) {
 	var xhr;
-	
-	//console.log(url);
 
 	if(typeof XMLHttpRequest !== 'undefined') xhr = new XMLHttpRequest();
 	else {
@@ -102,6 +101,5 @@ function XHR(url, log, callback) {
 	
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  // xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
 	xhr.send(JSON.stringify(log));
 }

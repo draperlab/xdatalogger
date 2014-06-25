@@ -61,9 +61,14 @@ function activityLogger(webWorkerURL) {
 		}
 
 		draperLog.sessionID = getParameterByName('USID');
+    draperLog.clientHostname = getParameterByName('client')
 
     if (!draperLog.sessionID) {
       draperLog.sessionID = draperLog.componentName.slice(0,3) + new Date().getTime()
+    }
+
+    if (!draperLog.clientHostname) {
+      draperLog.clientHostname = 'UNK'
     }
 
 		// set the logging URL on the Web Worker
@@ -88,11 +93,33 @@ function activityLogger(webWorkerURL) {
 		  });
 		
 		window.onbeforeunload = function(){
+      draperLog.logUserActivity(
+        'window closing',
+        'window_closed',
+        draperLog.WF_OTHER
+        )
+      
 			draperLog.worker.postMessage({
 		  	cmd: 'sendBuffer',
 		  	msg: ''
 		  });
 		};
+
+    window.onfocus = function() {
+      draperLog.logUserActivity(
+        'window gained focus',
+        'window_focus',
+        draperLog.WF_OTHER
+        )
+    }
+
+    window.onblur = function() {
+      draperLog.logUserActivity(
+        'window lost focus',
+        'window_blur',
+        draperLog.WF_OTHER
+        )
+    }
 
 		return draperLog;
 	};
